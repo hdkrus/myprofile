@@ -33,11 +33,11 @@ function linux-id-based() {
 
 function update-os() {
   local based=$(linux-id-based)
-  if [[ "$based" =~ *"debian"* ]]; then
+  if [[ "$based" = *"debian"* ]]; then
     update-debian-based
-  elif [[ "$based" =~ *"fedora"* ]]; then
+  elif [[ "$based" = *"fedora"* ]]; then
     update-fedora-based
-  elif [[ "$based" =~ *"arch"* ]]; then
+  elif [[ "$based" = *"arch"* ]]; then
     update-arch-based
   else
     error "Not supported update for distro based in $based"

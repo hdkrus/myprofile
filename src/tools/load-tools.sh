@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function load-tool() {
   local tools=${@}
@@ -8,4 +8,8 @@ function load-tool() {
   done
 }
 
-load-tool utils
+load-tool "utils"
+
+if [[ "$(is-mac)" == "yes" ]]; then
+  load-tool "brew"
+fi

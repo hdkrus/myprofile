@@ -37,6 +37,16 @@ function set-sources-dir() {
 
 set-sources-dir
 
+function run-all() {
+    local commands
+    commands=("$@")
+
+    for cmd in "${commands[@]}"; do
+        echo
+        eval "$cmd"
+    done
+}
+
 # aliases
 alias re-source=". $SOURCES_DIR/index.sh"
 
