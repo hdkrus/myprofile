@@ -1,11 +1,41 @@
-#!/bin/sh
+#!/bin/bash
 
-# current dir
-function curr-dir() {
-    export SOURCES_DIR=`dirname ${(%):-%x}`
+function is-bash() {
+    if [ -n "$BASH_VERSION" ]; then
+        echo "yes"
+    else
+        echo "no"
+    fi
 }
 
-curr-dir
+function is-zsh() {
+    if [ -n "$ZSH_VERSION" ]; then
+        echo "yes"
+    else
+        echo "no"
+    fi
+}
+
+function curr-dir() {
+    local DIR
+
+    if [ "$(is-zsh)" = "yes" ]; then
+        cd "$(dirname "${(%):-%x}")" > /dev/null
+    elif [ "$(is-bash)" = "yes" ]; then
+        cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null
+    fi
+    
+    DIR="$(pwd)"
+    cd - > /dev/null
+    echo "$DIR"
+}
+
+# current dir
+function set-sources-dir() {
+    export SOURCES_DIR="$(curr-dir)"
+}
+
+set-sources-dir
 
 # aliases
 alias re-source=". $SOURCES_DIR/index.sh"
