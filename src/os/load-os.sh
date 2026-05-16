@@ -19,6 +19,5 @@ function update-brew() {
 
 function update-all() {
   update-os
-  echo
   update-brew
 }
