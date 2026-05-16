@@ -2,4 +2,6 @@
 
 . "$OS_DIR/.unix_based.sh"
 
-function update-os() {}
+function update-os() {
+    sudo softwareupdate --install --all
+}
