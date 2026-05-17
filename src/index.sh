@@ -47,6 +47,22 @@ function run-all() {
     done
 }
 
+
+function update-myprofile() {
+    local PROFILE_DIR
+    PROFILE_DIR="$HOME/.myprofile"
+
+    if [ -d "$PROFILE_DIR" ]; then
+        echo "Updating myprofile in $PROFILE_DIR ..."
+        cd "$PROFILE_DIR" > /dev/null
+        git fetch --all > /dev/null
+        git pull > /dev/null
+        cd - > /dev/null
+    else
+        echo "[Error] Not found folder: $PROFILE_DIR" > &2
+    fi
+}
+
 # aliases
 alias re-source=". $SOURCES_DIR/index.sh"
 
