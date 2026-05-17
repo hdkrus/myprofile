@@ -39,6 +39,8 @@ function configure-myprofile-if-needed() {
         echo "$SOURCE_LINE" >> "$RC_FILE"
         echo "" >> "$RC_FILE"
     fi
+
+    re-source
 }
 
 install-myprofile

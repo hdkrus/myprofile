@@ -58,6 +58,8 @@ function update-myprofile() {
         git fetch --all > /dev/null
         git pull > /dev/null
         cd - > /dev/null
+        
+        re-source
     else
         echo "[Error] Not found folder: $PROFILE_DIR" >&2
     fi
