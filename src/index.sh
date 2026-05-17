@@ -47,6 +47,8 @@ function run-all() {
     done
 }
 
+# aliases
+alias re-source=". $SOURCES_DIR/index.sh"
 
 function update-myprofile() {
     local PROFILE_DIR
@@ -56,17 +58,17 @@ function update-myprofile() {
         echo "Updating myprofile in $PROFILE_DIR ..."
         cd "$PROFILE_DIR" > /dev/null
         git fetch --all > /dev/null
-        git pull > /dev/null
+        git pull --rebase > /dev/null
         cd - > /dev/null
-        
+
+        echo "Loading profile ..."
         re-source
+
+        echo "done"
     else
         echo "[Error] Not found folder: $PROFILE_DIR" >&2
     fi
 }
-
-# aliases
-alias re-source=". $SOURCES_DIR/index.sh"
 
 # import OS profile
 OS_DIR="$SOURCES_DIR/os"
