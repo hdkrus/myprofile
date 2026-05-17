@@ -59,7 +59,7 @@ function update-myprofile() {
         git pull > /dev/null
         cd - > /dev/null
     else
-        echo "[Error] Not found folder: $PROFILE_DIR" > &2
+        echo "[Error] Not found folder: $PROFILE_DIR" >&2
     fi
 }
 

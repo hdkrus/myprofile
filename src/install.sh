@@ -10,7 +10,7 @@ function install-myprofile() {
         mv $HOME/bash-profile $PROFILE_DIR
         cd - > /dev/null
     else
-        echo "Folder '$PROFILE_DIR' already exists" > &2
+        echo "Folder '$PROFILE_DIR' already exists" >&2
     fi
 
     echo "Loading myprofile ..."
