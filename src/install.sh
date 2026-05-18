@@ -7,7 +7,7 @@ function install-myprofile() {
         echo "Installing myprofile in $PROFILE_DIR ..."
         cd "$HOME" > /dev/null
         git clone https://github.com/hdkrus/bash-profile.git > /dev/null
-        mv $HOME/bash-profile $PROFILE_DIR
+        mv $HOME/myprofile $PROFILE_DIR
         cd - > /dev/null
     else
         echo "Folder '$PROFILE_DIR' already exists" >&2
