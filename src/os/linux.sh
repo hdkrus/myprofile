@@ -39,24 +39,39 @@ function update-os() {
     update-fedora-based
   elif [[ "$based" = *"arch"* ]]; then
     update-arch-based
+  elif [[ "$based" = *"opensuse"* ]]; then
+    update-opensuse
+  elif [[ "$based" = *"gentoo"* ]]; then
+    update-gentoo-based
   else
     error "Not supported update for distro based in $based"
   fi
 }
 
 function update-debian-based() {
-  echo "Updating debian based linux..."
+  echo "Updating Debian based linux..."
   sudo apt-get update
   sudo apt-get upgrade --yes
   sudo apt autoremove
 }
 
 function update-fedora-based() {
-  echo "Updating fedora based linux..."
-  sudo dnf upgrade -y
+  echo "Updating Fedora based linux..."
+  sudo dnf upgrade --assumeyes
 }
 
 function update-arch-based() {
-  echo "Updating arch based linux..."
+  echo "Updating Arch based linux..."
   sudo pacman -Syu --noconfirm
+}
+
+function update-opensuse() {
+  echo "Updating openSUSE linux..."
+  sudo zypper --non-interactive refresh
+  sudo zypper --non-interactive dup
+}
+
+function update-gentoo-based() {
+  echo "Updating Gentoo based linux..."
+  sudo emerge --update --deep --newuse --changed-deps @world
 }
