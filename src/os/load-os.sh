@@ -1,19 +1,9 @@
 #!/bin/bash
 
-function get-os() {
-    if [[ $OSTYPE == 'darwin'* ]]; then
-        echo "macos"
-    elif [[ $OSTYPE == 'linux'* ]]; then
-        echo "linux"
-    else
-        echo "unknown"
-    fi
-}
-
-function is-mac() {
+function is-macos() {
     local OS
-    OS=$(get-os)
-    if [[ "$OS" == 'macos' ]]; then
+    OS=$(uname | \grep Darwin)
+    if [[ ! -z "$OS" ]]; then
         echo 'yes'
     else
         echo 'no'
@@ -22,8 +12,8 @@ function is-mac() {
 
 function is-linux() {
     local OS
-    OS=$(get-os)
-    if [[ "$OS" == 'linux' ]]; then
+    OS=$(uname | \grep Linux)
+    if [[ ! -z "$OS" ]]; then
         echo 'yes'
     else
         echo 'no'
@@ -31,14 +21,10 @@ function is-linux() {
 }
 
 function is-wsl() {
-    local OS
-    OS=$(get-os)
-    if [[ "$OS" == 'linux' ]]; then
-        if uname -a | grep -q '^Linux.*microsoft'; then
-            echo 'yes'
-        else
-            echo 'no'
-        fi
+    local WSL
+    WSL=$(uname -r | \grep WSL)
+    if [[ ! -z "$WSL" ]]; then
+        echo 'yes'
     else
         echo 'no'
     fi
@@ -54,7 +40,7 @@ function update-all() {
 
 # run
 
-if [[ "$(is-mac)" == "yes" ]]; then
+if [[ "$(is-macos)" == "yes" ]]; then
     . "$OS_DIR/macos.sh"
 elif [[ "$(is-wsl)" == "yes" ]]; then
     . "$OS_DIR/wsl.sh"

@@ -10,6 +10,6 @@ function load-tool() {
 
 load-tool "utils"
 
-if [[ "$(is-mac)" == "yes" ]]; then
+if [[ "$(is-macos)" == "yes" ]]; then
   load-tool "brew"
 fi
