@@ -9,6 +9,7 @@ alias back-path='cd -'
 
 # enhanced listing
 alias l="ls -alhs --color"
+alias lsa="ls -ahl"
 
 # makes `less` command more usable
 # alias less="less +G -E -X"
