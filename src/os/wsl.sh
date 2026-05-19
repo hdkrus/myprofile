@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. "$OS_DIR/.linux_based.sh"
+. "$OS_DIR/linux.sh"
 
 function pbcopy() {
     tee <&0 | clip.exe
