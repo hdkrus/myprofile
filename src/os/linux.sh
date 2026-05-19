@@ -12,10 +12,14 @@ function linux-release() {
 }
 
 function linux-id() {
-  local id=$(linux-release | \grep ^ID=)
+  local id_line=$(linux-release | \grep ^ID=)
 
-  if [[ "$id" =~ ^ID=(.+) ]]; then
-    echo ${BASH_REMATCH[1]}
+  if [[ "$id_line" =~ ^ID=\"?([^\"]+)\"? ]] || [[ "$id_line" =~ ^ID=\'?([^\']+)\'? ]]; then
+    if [[ "$(is-zsh)" == "yes" ]]; then
+        echo "$match[1]"
+    elif [[ "$(is-bash)" == "yes" ]]; then
+        echo "${BASH_REMATCH[1]}"
+    fi
   else
     echo "<Unknown>"
   fi
@@ -24,10 +28,14 @@ function linux-id() {
 function linux-id-based() {
   local like=$(linux-release | \grep ^ID_LIKE=)
 
-  if [[ "$like" =~ ^ID_LIKE=(.+) ]]; then
-    echo ${BASH_REMATCH[1]}
+  if [[ "$like" =~ ^ID_LIKE=\"?([^\"]+)\"? ]] || [[ "$like" =~ ^ID_LIKE=\'?([^\']+)\'? ]]; then
+    if [[ "$(is-zsh)" == "yes" ]]; then
+        echo "$match[1]"
+    elif [[ "$(is-bash)" == "yes" ]]; then
+        echo "${BASH_REMATCH[1]}"
+    fi
   else
-    linux-id
+    echo "<Unknown>"
   fi
 }
 
