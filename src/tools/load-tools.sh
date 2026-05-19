@@ -4,7 +4,7 @@ function load-tool() {
   local tools=${@}
 
   for tool in "${tools[@]}"; do
-    . "$TOOLS_DIR/${tool}.sh"
+    source "$TOOLS_DIR/${tool}.sh"
   done
 }
 

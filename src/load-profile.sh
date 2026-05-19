@@ -2,7 +2,7 @@
 
 export MY_PROFILE_PATH="$HOME/.myprofile"
 
-. "$MY_PROFILE_PATH/commons.sh"
+source "$MY_PROFILE_PATH/commons.sh"
 
 function run-all() {
     local commands
@@ -15,7 +15,7 @@ function run-all() {
 }
 
 # aliases
-alias re-source=". $MY_PROFILE_PATH/src/load-profile.sh"
+alias re-source="source $MY_PROFILE_PATH/src/load-profile.sh"
 
 function update-myprofile() {
 
@@ -37,13 +37,13 @@ function update-myprofile() {
 
 # import OS profile
 OS_DIR="$MY_PROFILE_PATH/src/os"
-. "$OS_DIR/load-os.sh"
+source "$OS_DIR/load-os.sh"
 
 # import tools profile
 TOOLS_DIR="$MY_PROFILE_PATH/src/tools"
-. "$TOOLS_DIR/load-tools.sh"
+source "$TOOLS_DIR/load-tools.sh"
 
 # import personal profile
 PERSONAL_DIR="$MY_PROFILE_PATH/src/personal"
-. "$PERSONAL_DIR/user.sh"
-. "$PERSONAL_DIR/company.sh"
+source "$PERSONAL_DIR/user.sh"
+source "$PERSONAL_DIR/company.sh"

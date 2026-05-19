@@ -2,7 +2,7 @@
 
 export MY_PROFILE_PATH="$HOME/.myprofile"
 
-. "$MY_PROFILE_PATH/commons.sh"
+source "$MY_PROFILE_PATH/commons.sh"
 
 function install-myprofile() {
     if [ ! -d "$MY_PROFILE_PATH" ]; then
@@ -29,7 +29,7 @@ function configure-myprofile-if-needed() {
     echo "[CONFIG] Looking for configurations in $RC_FILE"
 
     local SOURCE_LINE
-    SOURCE_LINE=". $MY_PROFILE_PATH/src/load-profile.sh"
+    SOURCE_LINE="source $MY_PROFILE_PATH/src/load-profile.sh"
 
     local SEARCH
     SEARCH=$(cat "$RC_FILE" | \grep "$SOURCE_LINE")
@@ -45,7 +45,7 @@ function configure-myprofile-if-needed() {
     fi
 
     echo "[CONFIG] Loading myprofile ..."
-    . "$MY_PROFILE_PATH/src/load-profile.sh"
+    source "$MY_PROFILE_PATH/src/load-profile.sh"
     echo "[CONFIG] done"
 }
 
