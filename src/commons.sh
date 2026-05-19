@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function is-bash() {
-    if [ -n "$BASH_VERSION" ]; then
+    if [[ "$SHELL" == *"/bash" ]]; then
         echo "yes"
     else
         echo "no"
@@ -9,7 +9,7 @@ function is-bash() {
 }
 
 function is-zsh() {
-    if [ -n "$ZSH_VERSION" ]; then
+    if [[ "$SHELL" == *"/zsh" ]]; then
         echo "yes"
     else
         echo "no"
