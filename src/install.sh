@@ -6,7 +6,7 @@ function install-myprofile() {
     if [ ! -d "$PROFILE_DIR" ]; then
         echo "Installing myprofile in $PROFILE_DIR ..."
         cd "$HOME" > /dev/null
-        git clone https://github.com/hdkrus/bash-profile.git > /dev/null
+        git clone https://github.com/hdkrus/myprofile.git > /dev/null
         mv $HOME/myprofile $PROFILE_DIR
         cd - > /dev/null
     else
