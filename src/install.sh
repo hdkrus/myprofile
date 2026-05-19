@@ -4,18 +4,18 @@ export MY_PROFILE_PATH="$HOME/.myprofile"
 
 function install-myprofile() {
     if [ ! -d "$MY_PROFILE_PATH" ]; then
-        echo "Installing myprofile in $MY_PROFILE_PATH ..."
+        echo "[INSTALL] Installing myprofile in $MY_PROFILE_PATH ..."
         cd "$HOME" > /dev/null
         git clone https://github.com/hdkrus/myprofile.git > /dev/null
         mv $HOME/myprofile $MY_PROFILE_PATH
         cd - > /dev/null
     else
-        echo "Folder '$MY_PROFILE_PATH' already exists" >&2
+        echo "[INSTALL] Folder '$MY_PROFILE_PATH' already exists" >&2
     fi
 
-    echo "Loading myprofile ..."
+    echo "[INSTALL] Loading myprofile ..."
     . "$MY_PROFILE_PATH/src/index.sh"
-    echo "done"
+    echo "[INSTALL] done"
 
     configure-myprofile-if-needed
 }
@@ -28,19 +28,27 @@ function configure-myprofile-if-needed() {
         RC_FILE="$HOME/.bashrc"
     fi
 
+    echo "[CONFIG] Looking for configurations in $RC_FILE"
+
     local SOURCE_LINE
     SOURCE_LINE=". $MY_PROFILE_PATH/src/index.sh"
 
     local SEARCH
     SEARCH=$(cat "$RC_FILE" | \grep "$SOURCE_LINE")
     if [ -z "$SEARCH" ]; then
+        echo "[CONFIG] Adding configurations to $RC_FILE ..."
+
         echo "" >> "$RC_FILE"
         echo "# load myprofile" >> "$RC_FILE"
         echo "$SOURCE_LINE" >> "$RC_FILE"
         echo "" >> "$RC_FILE"
+    else
+        echo "[CONFIG] $RC_FILE is already configured"
     fi
 
     . "$MY_PROFILE_PATH/src/index.sh"
+
+    echo "[CONFIG] done"
 }
 
 install-myprofile
