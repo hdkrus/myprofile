@@ -2,7 +2,7 @@
 
 export MY_PROFILE_PATH="$HOME/.myprofile"
 
-source "$MY_PROFILE_PATH/commons.sh"
+source "$MY_PROFILE_PATH/src/commons.sh"
 
 function run-all() {
     local commands

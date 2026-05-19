@@ -2,8 +2,6 @@
 
 export MY_PROFILE_PATH="$HOME/.myprofile"
 
-source "$MY_PROFILE_PATH/commons.sh"
-
 function install-myprofile() {
     if [ ! -d "$MY_PROFILE_PATH" ]; then
         echo "[INSTALL] Installing myprofile in $MY_PROFILE_PATH ..."
@@ -19,6 +17,9 @@ function install-myprofile() {
 }
 
 function configure-myprofile-if-needed() {
+
+    source "$MY_PROFILE_PATH/src/commons.sh"
+
     local RC_FILE
     if [[ "$(is-zsh)" == "yes" ]]; then
         RC_FILE="$HOME/.zshrc"
