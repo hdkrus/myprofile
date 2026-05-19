@@ -2,21 +2,7 @@
 
 export MY_PROFILE_PATH="$HOME/.myprofile"
 
-function is-bash() {
-    if [ -n "$BASH_VERSION" ]; then
-        echo "yes"
-    else
-        echo "no"
-    fi
-}
-
-function is-zsh() {
-    if [ -n "$ZSH_VERSION" ]; then
-        echo "yes"
-    else
-        echo "no"
-    fi
-}
+. "$MY_PROFILE_PATH/commons.sh"
 
 function run-all() {
     local commands
@@ -29,7 +15,7 @@ function run-all() {
 }
 
 # aliases
-alias re-source=". $MY_PROFILE_PATH/src/index.sh"
+alias re-source=". $MY_PROFILE_PATH/src/load-profile.sh"
 
 function update-myprofile() {
 

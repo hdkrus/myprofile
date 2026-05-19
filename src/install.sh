@@ -2,6 +2,8 @@
 
 export MY_PROFILE_PATH="$HOME/.myprofile"
 
+. "$MY_PROFILE_PATH/commons.sh"
+
 function install-myprofile() {
     if [ ! -d "$MY_PROFILE_PATH" ]; then
         echo "[INSTALL] Installing myprofile in $MY_PROFILE_PATH ..."
@@ -12,10 +14,6 @@ function install-myprofile() {
     else
         echo "[INSTALL] Folder '$MY_PROFILE_PATH' already exists" >&2
     fi
-
-    echo "[INSTALL] Loading myprofile ..."
-    . "$MY_PROFILE_PATH/src/index.sh"
-    echo "[INSTALL] done"
 
     configure-myprofile-if-needed
 }
@@ -31,7 +29,7 @@ function configure-myprofile-if-needed() {
     echo "[CONFIG] Looking for configurations in $RC_FILE"
 
     local SOURCE_LINE
-    SOURCE_LINE=". $MY_PROFILE_PATH/src/index.sh"
+    SOURCE_LINE=". $MY_PROFILE_PATH/src/load-profile.sh"
 
     local SEARCH
     SEARCH=$(cat "$RC_FILE" | \grep "$SOURCE_LINE")
@@ -46,8 +44,8 @@ function configure-myprofile-if-needed() {
         echo "[CONFIG] $RC_FILE is already configured"
     fi
 
-    . "$MY_PROFILE_PATH/src/index.sh"
-
+    echo "[CONFIG] Loading myprofile ..."
+    . "$MY_PROFILE_PATH/src/load-profile.sh"
     echo "[CONFIG] done"
 }
 
