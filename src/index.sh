@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export MY_PROFILE_PATH="$HOME/.myprofile"
+
 function is-bash() {
     if [ -n "$BASH_VERSION" ]; then
         echo "yes"
@@ -16,27 +18,6 @@ function is-zsh() {
     fi
 }
 
-function curr-dir() {
-    local DIR
-
-    if [ "$(is-zsh)" = "yes" ]; then
-        cd "$(dirname "${(%):-%x}")" > /dev/null
-    elif [ "$(is-bash)" = "yes" ]; then
-        cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null
-    fi
-    
-    DIR="$(pwd)"
-    cd - > /dev/null
-    echo "$DIR"
-}
-
-# current dir
-function set-sources-dir() {
-    export SOURCES_DIR="$(curr-dir)"
-}
-
-set-sources-dir
-
 function run-all() {
     local commands
     commands=("$@")
@@ -48,15 +29,13 @@ function run-all() {
 }
 
 # aliases
-alias re-source=". $SOURCES_DIR/index.sh"
+alias re-source=". $MY_PROFILE_PATH/src/index.sh"
 
 function update-myprofile() {
-    local PROFILE_DIR
-    PROFILE_DIR="$HOME/.myprofile"
 
-    if [ -d "$PROFILE_DIR" ]; then
-        echo "Updating myprofile in $PROFILE_DIR ..."
-        cd "$PROFILE_DIR" > /dev/null
+    if [ -d "$MY_PROFILE_PATH" ]; then
+        echo "Updating myprofile in $MY_PROFILE_PATH ..."
+        cd "$MY_PROFILE_PATH" > /dev/null
         git fetch --all > /dev/null
         git pull --rebase > /dev/null
         cd - > /dev/null
@@ -66,19 +45,19 @@ function update-myprofile() {
 
         echo "done"
     else
-        echo "[Error] Not found folder: $PROFILE_DIR" >&2
+        echo "[Error] Not found folder: $MY_PROFILE_PATH" >&2
     fi
 }
 
 # import OS profile
-OS_DIR="$SOURCES_DIR/os"
+OS_DIR="$MY_PROFILE_PATH/src/os"
 . "$OS_DIR/load-os.sh"
 
 # import tools profile
-TOOLS_DIR="$SOURCES_DIR/tools"
+TOOLS_DIR="$MY_PROFILE_PATH/src/tools"
 . "$TOOLS_DIR/load-tools.sh"
 
 # import personal profile
-PERSONAL_DIR="$SOURCES_DIR/personal"
+PERSONAL_DIR="$MY_PROFILE_PATH/src/personal"
 . "$PERSONAL_DIR/user.sh"
 . "$PERSONAL_DIR/company.sh"

@@ -1,20 +1,20 @@
 #!/bin/bash
 
-PROFILE_DIR="$HOME/.myprofile"
+export MY_PROFILE_PATH="$HOME/.myprofile"
 
 function install-myprofile() {
-    if [ ! -d "$PROFILE_DIR" ]; then
-        echo "Installing myprofile in $PROFILE_DIR ..."
+    if [ ! -d "$MY_PROFILE_PATH" ]; then
+        echo "Installing myprofile in $MY_PROFILE_PATH ..."
         cd "$HOME" > /dev/null
         git clone https://github.com/hdkrus/myprofile.git > /dev/null
-        mv $HOME/myprofile $PROFILE_DIR
+        mv $HOME/myprofile $MY_PROFILE_PATH
         cd - > /dev/null
     else
-        echo "Folder '$PROFILE_DIR' already exists" >&2
+        echo "Folder '$MY_PROFILE_PATH' already exists" >&2
     fi
 
     echo "Loading myprofile ..."
-    . "$PROFILE_DIR/src/index.sh"
+    . "$MY_PROFILE_PATH/src/index.sh"
     echo "done"
 
     configure-myprofile-if-needed
@@ -27,9 +27,9 @@ function configure-myprofile-if-needed() {
     elif [[ "$(is-bash)" == "yes" ]]; then
         RC_FILE="$HOME/.bashrc"
     fi
-        
+
     local SOURCE_LINE
-    SOURCE_LINE=". $PROFILE_DIR/src/index.sh"
+    SOURCE_LINE=". $MY_PROFILE_PATH/src/index.sh"
 
     local SEARCH
     SEARCH=$(cat "$RC_FILE" | \grep "$SOURCE_LINE")
@@ -40,7 +40,7 @@ function configure-myprofile-if-needed() {
         echo "" >> "$RC_FILE"
     fi
 
-    re-source
+    . "$MY_PROFILE_PATH/src/index.sh"
 }
 
 install-myprofile
