@@ -6,9 +6,16 @@ function install-myprofile() {
     if [ ! -d "$MY_PROFILE_PATH" ]; then
         echo "[INSTALL] Installing myprofile in $MY_PROFILE_PATH ..."
         cd "$HOME" > /dev/null
-        git clone https://github.com/hdkrus/myprofile.git > /dev/null
+
+        local GIT_REPO
+        GIT_REPO="https://github.com/hdkrus/myprofile.git"
+        echo "[INSTALL] Cloning from $GIT_REPO ..."
+        git clone "$GIT_REPO" -q
+
         mv $HOME/myprofile $MY_PROFILE_PATH
         cd - > /dev/null
+
+        echo "[INSTALL] done"
     else
         echo "[INSTALL] Folder '$MY_PROFILE_PATH' already exists" >&2
     fi
