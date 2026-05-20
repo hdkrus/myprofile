@@ -2,25 +2,41 @@
 
 export MY_PROFILE_PATH="$HOME/.myprofile"
 
-function install-myprofile() {
-    if [ ! -d "$MY_PROFILE_PATH" ]; then
-        echo "[INSTALL] Installing myprofile in $MY_PROFILE_PATH ..."
-        cd "$HOME" > /dev/null
-
-        local GIT_REPO
-        GIT_REPO="https://github.com/hdkrus/myprofile.git"
-        echo "[INSTALL] Cloning from $GIT_REPO ..."
-        git clone "$GIT_REPO" -q
-
-        mv $HOME/myprofile $MY_PROFILE_PATH
-        cd - > /dev/null
-
-        echo "[INSTALL] done"
-    else
-        echo "[INSTALL] Folder '$MY_PROFILE_PATH' already exists" >&2
+function check-requirements() {
+    if ! command -v git &> /dev/null; then
+        echo "[INSTALL] [ERROR] Git is not found, please install git and then reinstall"
     fi
+}
 
-    configure-myprofile-if-needed
+function install-myprofile() {
+    local requirements
+    requirements="$(check-requirements)"
+    
+    if [[ -z "$requirements" ]]; then
+    
+        if [ ! -d "$MY_PROFILE_PATH" ]; then        
+            echo "[INSTALL] Installing myprofile in $MY_PROFILE_PATH ..."
+            cd "$HOME" > /dev/null
+    
+            local GIT_REPO
+            GIT_REPO="https://github.com/hdkrus/myprofile.git"
+            echo "[INSTALL] Cloning from $GIT_REPO ..."
+            git clone "$GIT_REPO" -q
+    
+            mv $HOME/myprofile $MY_PROFILE_PATH
+            cd - > /dev/null
+    
+            echo "[INSTALL] done"
+        else
+            echo "[INSTALL] Folder '$MY_PROFILE_PATH' already exists" >&2
+        fi
+    
+        configure-myprofile-if-needed
+
+    else
+        echo "$requirements" >&2
+        exit 1
+    fi
 }
 
 function configure-myprofile-if-needed() {
