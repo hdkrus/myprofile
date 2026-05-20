@@ -1,10 +1,10 @@
 #!/bin/bash
 
 function load-tool() {
-  local tools=${@}
+  local tools=("$@")
 
   for tool in "${tools[@]}"; do
-    source "$TOOLS_DIR/${tool}.sh"
+    source "$(myprofile-tools-path)/${tool}.sh"
   done
 }
 

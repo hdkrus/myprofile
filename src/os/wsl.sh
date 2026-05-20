@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$OS_DIR/linux.sh"
+source "$(myprofile-os-path)/linux.sh"
 
 function pbcopy() {
     tee <&0 | clip.exe

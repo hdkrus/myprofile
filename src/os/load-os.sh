@@ -41,9 +41,9 @@ function update-all() {
 # run
 
 if [[ "$(is-macos)" == "yes" ]]; then
-    source "$OS_DIR/macos.sh"
+    source "$(myprofile-os-path)/macos.sh"
 elif [[ "$(is-wsl)" == "yes" ]]; then
-    source "$OS_DIR/wsl.sh"
+    source "$(myprofile-os-path)/wsl.sh"
 elif [[ "$(is-linux)" == "yes" ]]; then
-    source "$OS_DIR/linux.sh"
+    source "$(myprofile-os-path)/linux.sh"
 fi

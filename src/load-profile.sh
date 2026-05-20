@@ -36,14 +36,11 @@ function update-myprofile() {
 }
 
 # import OS profile
-OS_DIR="$MY_PROFILE_PATH/src/os"
-source "$OS_DIR/load-os.sh"
+source "$(myprofile-os-path)/load-os.sh"
 
 # import tools profile
-TOOLS_DIR="$MY_PROFILE_PATH/src/tools"
-source "$TOOLS_DIR/load-tools.sh"
+source "$(myprofile-tools-path)/load-tools.sh"
 
 # import personal profile
-PERSONAL_DIR="$MY_PROFILE_PATH/src/personal"
-source "$PERSONAL_DIR/user.sh"
-source "$PERSONAL_DIR/company.sh"
+source "$(myprofile-personal-path)/user.sh"
+source "$(myprofile-personal-path)/company.sh"

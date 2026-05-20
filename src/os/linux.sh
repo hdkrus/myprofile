@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$OS_DIR/.unix_based.sh"
+source "$(myprofile-os-path)/.unix_based.sh"
 
 # clipboard commands
 alias pbcopy='xclip -selection clipboard'
