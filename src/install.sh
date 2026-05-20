@@ -4,7 +4,7 @@ export MY_PROFILE_PATH="$HOME/.myprofile"
 
 function check-requirements() {
     if ! command -v git &> /dev/null; then
-        echo "[INSTALL] [ERROR] Git is not found, please install git and then reinstall"
+        echo "[REQUIREMENTS] [ERROR] Git is not found, please install git and then reinstall"
     fi
 }
 
