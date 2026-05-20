@@ -8,8 +8,16 @@ function load-tool() {
   done
 }
 
-load-tool "utils"
+function load-existing-tools() {
+    load-tool "utils"
+    
+    if command -v brew &> /dev/null; then
+        load-tool "brew"
+    fi
+    
+    if command -v kubectl &> /dev/null; then
+        load-tool "k8s"
+    fi
+}
 
-if [[ "$(is-macos)" == "yes" ]]; then
-  load-tool "brew"
-fi
+load-existing-tools
