@@ -35,7 +35,7 @@ function linux-id-based() {
         echo "${BASH_REMATCH[1]}"
     fi
   else
-    echo "<Unknown>"
+    linux-id
   fi
 }
 
