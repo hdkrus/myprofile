@@ -8,24 +8,21 @@ function load-tool() {
   done
 }
 
+function load-tool-if-exists() {
+    local tool="@1"
+    
+    if command -v "$tool" &> /dev/null; then
+        load-tool "$tool"
+    fi
+}
+
 function load-existing-tools() {
     load-tool "utils"
     
-    if command -v brew &> /dev/null; then
-        load-tool "brew"
-    fi
-    
-    if command -v flatpak &> /dev/null; then
-        load-tool "flatpak"
-    fi
-    
-    if command -v snap &> /dev/null; then
-        load-tool "snap"
-    fi
-    
-    if command -v kubectl &> /dev/null; then
-        load-tool "k8s"
-    fi
+    load-tool-if-exists brew
+    load-tool-if-exists flatpak
+    load-tool-if-exists snap
+    load-tool-if-exists k8s
 }
 
 load-existing-tools

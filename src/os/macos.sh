@@ -6,3 +6,5 @@ function update-os() {
     echo "Updating MacOS ..."
     sudo softwareupdate --install --all --verbose
 }
+
+load-tool-if-exists mas
