@@ -58,14 +58,14 @@ function update-os() {
 
 function update-debian-based() {
   echo "Updating Debian based linux..."
-  sudo apt-get update
-  sudo apt-get upgrade --yes
-  sudo apt autoremove
+  sudo apt update
+  sudo apt full-upgrade --yes
+  sudo apt autoremove --yes
 }
 
 function update-fedora-based() {
   echo "Updating Fedora based linux..."
-  sudo dnf upgrade --assumeyes
+  sudo dnf upgrade --refresh --assumeyes
 }
 
 function update-arch-based() {
