@@ -20,16 +20,22 @@ alias re-source="source $MY_PROFILE_PATH/src/load-profile.sh"
 function update-myprofile() {
 
     if [ -d "$MY_PROFILE_PATH" ]; then
-        echo "[UPDATE] Updating myprofile in $MY_PROFILE_PATH ..."
+        
         cd "$MY_PROFILE_PATH" > /dev/null
-        git fetch --all > /dev/null
-        git pull --rebase > /dev/null
-        cd - > /dev/null
+        git fetch --all -q
+        local outdated
+        outdated=$(git rev-list --count HEAD..origin/main)
 
-        echo "[UPDATE] Loading profile ..."
-        re-source
+        if [[ "$outdated" != "0" ]]; then
+            echo "[UPDATE] Updating myprofile in $MY_PROFILE_PATH ..."
+            git pull --rebase -q
+            cd - > /dev/null
 
-        echo "[UPDATE] done"
+            echo "[UPDATE] Reloading profile ..."
+            re-source
+
+            echo "[UPDATE] done"
+        fi
     else
         echo "[UPDATE] [Error] Not found folder: $MY_PROFILE_PATH" >&2
     fi

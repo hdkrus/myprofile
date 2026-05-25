@@ -31,6 +31,7 @@ function is-wsl() {
 }
 
 export UPDATE_LIST=(
+    "update-myprofile"
     "update-os"
 )
 
