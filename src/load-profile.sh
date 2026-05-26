@@ -9,7 +9,6 @@ function run-all() {
     commands=("$@")
 
     for cmd in "${commands[@]}"; do
-        echo
         eval "$cmd"
     done
 }
@@ -27,18 +26,27 @@ function update-myprofile() {
         outdated=$(git rev-list --count HEAD..origin/main)
 
         if [[ "$outdated" != "0" ]]; then
-            echo "[UPDATE] Updating myprofile in $MY_PROFILE_PATH ..."
+            echo "Updating myprofile in $MY_PROFILE_PATH ..."
             git pull --rebase -q
             cd - > /dev/null
 
-            echo "[UPDATE] Reloading profile ..."
+            echo "Reloading profile ..."
             re-source
-
-            echo "[UPDATE] done"
         fi
+
+        echo "MyProfile is updated"
     else
-        echo "[UPDATE] [Error] Not found folder: $MY_PROFILE_PATH" >&2
+        echo "[Error] Not found folder: $MY_PROFILE_PATH" >&2
     fi
+}
+
+export UPDATE_LIST=(
+    "update-myprofile"
+    "update-os"
+)
+
+function update-all() {
+    run-all "${UPDATE_LIST[@]}"
 }
 
 # import tools profile

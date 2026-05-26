@@ -30,15 +30,6 @@ function is-wsl() {
     fi
 }
 
-export UPDATE_LIST=(
-    "update-myprofile"
-    "update-os"
-)
-
-function update-all() {
-  run-all "${UPDATE_LIST[@]}"
-}
-
 # run
 
 if [[ "$(is-macos)" == "yes" ]]; then

@@ -9,7 +9,7 @@ function load-tool() {
 }
 
 function load-tool-if-exists() {
-    local tool="@1"
+    local tool="$1"
     
     if command -v "$tool" &> /dev/null; then
         load-tool "$tool"
