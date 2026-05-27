@@ -3,6 +3,6 @@
 UPDATE_LIST+=("update-flatpak")
 
 function update-flatpak() {
-  echo "Updating flatpak..."
+  echo-color yellow "Updating flatpak..."
   flatpak update --assumeyes
 }

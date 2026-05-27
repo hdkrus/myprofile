@@ -57,29 +57,29 @@ function update-os() {
 }
 
 function update-debian-based() {
-  echo "Updating Debian based linux..."
+  echo-color yellow "Updating Debian based linux..."
   sudo apt update
   sudo apt full-upgrade --yes
   sudo apt autoremove --yes
 }
 
 function update-fedora-based() {
-  echo "Updating Fedora based linux..."
+  echo-color yellow "Updating Fedora based linux..."
   sudo dnf upgrade --refresh --assumeyes
 }
 
 function update-arch-based() {
-  echo "Updating Arch based linux..."
+  echo-color yellow "Updating Arch based linux..."
   sudo pacman -Syu --noconfirm
 }
 
 function update-opensuse() {
-  echo "Updating openSUSE linux..."
+  echo-color yellow "Updating openSUSE linux..."
   sudo zypper --non-interactive refresh
   sudo zypper --non-interactive dup
 }
 
 function update-gentoo-based() {
-  echo "Updating Gentoo based linux..."
+  echo-color yellow "Updating Gentoo based linux..."
   sudo emerge --update --deep --newuse --changed-deps @world
 }

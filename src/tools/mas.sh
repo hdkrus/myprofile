@@ -3,6 +3,6 @@
 UPDATE_LIST+=("update-app-store")
 
 function update-app-store() {
-  echo "Updating App Store..."
+  echo-color yellow "Updating App Store..."
   mas upgrade
 }

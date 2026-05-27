@@ -34,9 +34,9 @@ function update-myprofile() {
             re-source
         fi
 
-        echo "MyProfile is updated"
+        echo-color green "MyProfile is updated"
     else
-        echo "[Error] Not found folder: $MY_PROFILE_PATH" >&2
+        echo-color red "[Error] Not found folder: $MY_PROFILE_PATH" >&2
     fi
 }
 
