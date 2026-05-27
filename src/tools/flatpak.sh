@@ -4,5 +4,5 @@ UPDATE_LIST+=("update-flatpak")
 
 function update-flatpak() {
   echo "Updating flatpak..."
-  flatpak update
+  flatpak update --assumeyes
 }
