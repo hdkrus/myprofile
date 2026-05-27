@@ -54,7 +54,3 @@ source "$(myprofile-tools-path)/load-tools.sh"
 
 # import OS profile
 source "$(myprofile-os-path)/load-os.sh"
-
-# import personal profile
-source "$(myprofile-personal-path)/user.sh"
-source "$(myprofile-personal-path)/company.sh"
