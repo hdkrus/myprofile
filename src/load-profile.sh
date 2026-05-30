@@ -19,7 +19,7 @@ alias re-source="source $MY_PROFILE_PATH/src/load-profile.sh"
 function update-myprofile() {
 
     if [ -d "$MY_PROFILE_PATH" ]; then
-        
+
         cd "$MY_PROFILE_PATH" > /dev/null
         git fetch --all -q
         local outdated
@@ -28,11 +28,12 @@ function update-myprofile() {
         if [[ "$outdated" != "0" ]]; then
             echo "Updating myprofile in $MY_PROFILE_PATH ..."
             git pull --rebase -q
-            cd - > /dev/null
 
             echo "Reloading profile ..."
             re-source
         fi
+
+        cd - > /dev/null
 
         echo-color green "MyProfile is updated"
     else
