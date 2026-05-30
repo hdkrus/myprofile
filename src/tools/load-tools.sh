@@ -8,8 +8,26 @@ function load-tool() {
   done
 }
 
-load-tool "utils"
+function load-tool-if-exists() {
+    local tool="$1"
+    local cmd="$2"
 
-if [[ "$(is-macos)" == "yes" ]]; then
-  load-tool "brew"
-fi
+    if [ -z "$cmd" ]; then
+      cmd="$tool"
+    fi
+    
+    if command -v "$cmd" &> /dev/null; then
+        load-tool "$tool"
+    fi
+}
+
+function load-existing-tools() {
+    load-tool "utils"
+    
+    load-tool-if-exists brew
+    load-tool-if-exists flatpak
+    load-tool-if-exists snap
+    load-tool-if-exists k8s kubectl
+}
+
+load-existing-tools
