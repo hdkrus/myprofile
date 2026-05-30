@@ -8,9 +8,11 @@ function echo-color() {
     if [[ -z "$msg" ]]; then
         msg="$fg"
         fg=""
+    else
+        fg=$(lower "$fg")
     fi
 
-    case "${(L)fg}" in
+    case "$fg" in
         black)   color_code="\033[30m" ;;
         red)     color_code="\033[31m" ;;
         green)   color_code="\033[32m" ;;
