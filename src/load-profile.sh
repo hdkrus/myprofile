@@ -26,16 +26,18 @@ function update-myprofile() {
         outdated=$(git rev-list --count HEAD..origin/main)
 
         if [[ "$outdated" != "0" ]]; then
-            echo "Updating myprofile in $MY_PROFILE_PATH ..."
+            echo-color yellow "Updating MyProfile ..."
             git pull --rebase -q
 
-            echo "Reloading profile ..."
+            echo "Reloading MyProfile ..."
             re-source
+
+            echo-color green "MyProfile was successfully updated"
+        else
+            echo "MyProfile is up to date"
         fi
 
         cd - > /dev/null
-
-        echo-color green "MyProfile is updated"
     else
         echo-color red "[Error] Not found folder: $MY_PROFILE_PATH" >&2
     fi
