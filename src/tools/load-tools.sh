@@ -15,7 +15,7 @@ function load-tool-if-exists() {
     if [ -z "$cmd" ]; then
       cmd="$tool"
     fi
-    
+
     if command -v "$cmd" &> /dev/null; then
         load-tool "$tool"
     fi
@@ -23,9 +23,10 @@ function load-tool-if-exists() {
 
 function load-existing-tools() {
     load-tool "utils"
-    
+
     load-tool-if-exists brew
     load-tool-if-exists flatpak
+    load-tool-if-exists sdk
     load-tool-if-exists snap
     load-tool-if-exists k8s kubectl
 }
