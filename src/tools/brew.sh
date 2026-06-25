@@ -8,7 +8,7 @@ UPDATE_LIST+=("update-brew")
 
 function update-brew() {
   echo-color yellow "Updating brew..."
-  yes | brew update
-  yes | brew upgrade
+  brew update
+  brew upgrade --yes
   brew cleanup
 }
